@@ -73,10 +73,11 @@ function run() {
         try {
             const useCurrentVersion = core.getInput('use_current_version');
             let currentVersion = null;
-            if (useCurrentVersion) {
+            if (useCurrentVersion && useCurrentVersion !== 'false') {
                 const path = core.getInput('path');
                 const filename = core.getInput('filename');
                 const field = core.getInput('field');
+                core.info(`Read version from path: ${path}, fileName: ${filename}, field: ${field}`);
                 currentVersion = (0, getVersion_1.getVersion)(path, filename, field);
                 core.setOutput('current_version', currentVersion);
             }
@@ -92,6 +93,7 @@ function run() {
                 core.setOutput('pre_release_type', res.pre_release_type);
                 core.setOutput('pre_release_name', res.pre_release_name);
                 core.setOutput('full', res.full);
+                core.setOutput('main', res.main);
                 core.setOutput('major', res.major);
                 core.setOutput('minor', res.minor);
                 core.setOutput('patch', res.patch);
@@ -142,6 +144,7 @@ const parsePrelease = (semverString, currentVersion) => {
         major: parsed === null || parsed === void 0 ? void 0 : parsed.major,
         minor: parsed === null || parsed === void 0 ? void 0 : parsed.minor,
         patch: parsed === null || parsed === void 0 ? void 0 : parsed.patch,
+        main: `${parsed === null || parsed === void 0 ? void 0 : parsed.major}.${parsed === null || parsed === void 0 ? void 0 : parsed.minor}.${parsed === null || parsed === void 0 ? void 0 : parsed.patch}`,
         prerelease: parsed === null || parsed === void 0 ? void 0 : parsed.prerelease,
         build: parsed === null || parsed === void 0 ? void 0 : parsed.build,
         pre_release_name: preReleaseName,

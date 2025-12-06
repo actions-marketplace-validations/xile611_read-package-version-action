@@ -32,3 +32,15 @@ test('test runs', () => {
 
   console.log(cp.execFileSync(np, [ip], options).toString())
 })
+
+test('test runs', () => {
+  process.env['INPUT_SEMVER_STRING'] = '2.3.0'
+  process.env['INPUT_USE_CURRENT_VERSION'] = 'false'
+  const np = process.execPath
+  const ip = path.join(__dirname, '..', 'lib', 'main.js')
+  const options: cp.ExecFileSyncOptions = {
+    env: process.env
+  }
+
+  console.log(cp.execFileSync(np, [ip], options).toString())
+})

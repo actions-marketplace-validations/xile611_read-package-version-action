@@ -8,6 +8,7 @@ export interface ParsedSemverInfo
     >
   > {
   full: string
+  main: string
   pre_release_name: string
   pre_release_type: string
 }
@@ -45,6 +46,7 @@ export const parsePrelease = (
     major: parsed?.major,
     minor: parsed?.minor,
     patch: parsed?.patch,
+    main: `${parsed?.major}.${parsed?.minor}.${parsed?.patch}`,
     prerelease: parsed?.prerelease,
     build: parsed?.build,
     pre_release_name: preReleaseName,

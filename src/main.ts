@@ -7,10 +7,13 @@ async function run(): Promise<void> {
     const useCurrentVersion = core.getInput('use_current_version')
     let currentVersion: string | null = null
 
-    if (useCurrentVersion) {
+    if (useCurrentVersion && useCurrentVersion !== 'false') {
       const path: string = core.getInput('path')
       const filename: string = core.getInput('filename')
       const field: string = core.getInput('field')
+      core.info(
+        `Read version from path: ${path}, fileName: ${filename}, field: ${field}`
+      )
       currentVersion = getVersion(path, filename, field)
 
       core.setOutput('current_version', currentVersion)
@@ -36,6 +39,7 @@ async function run(): Promise<void> {
       core.setOutput('pre_release_type', res.pre_release_type)
       core.setOutput('pre_release_name', res.pre_release_name)
       core.setOutput('full', res.full)
+      core.setOutput('main', res.main)
       core.setOutput('major', res.major)
       core.setOutput('minor', res.minor)
       core.setOutput('patch', res.patch)

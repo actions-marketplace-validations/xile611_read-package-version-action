@@ -25,8 +25,26 @@ inputs:
     required: false
     description: 'The pattern to parse the semver string'
 outputs:
-  version: # id of the output
-    description: 'the version to read'
+  current_version:
+    description: 'the current version'
+  pre_release_type:
+    description: 'the pre-release type parsed from semver_string or current version'
+  pre_release_name:
+    description: 'the pre-release name parsed from semver_string or current version'
+  full:
+    description: 'the full version parsed from semver_string or current version'
+  main:
+    description: 'the main version parsed from semver_string or current version'
+  major:
+    description: 'the major version parsed from semver_string or current version'
+  minor:
+    description: 'the minor version parsed from semver_string or current version'
+  patch:
+    description: 'the patch version parsed from semver_string or current version'
+  prerelease:
+    description: 'the prerelease string parsed from semver_string or current version'
+  build:
+    description: 'the build string parsed from semver_string or current version '
 runs:
   using: 'node16'
   main: 'dist/index.js'
